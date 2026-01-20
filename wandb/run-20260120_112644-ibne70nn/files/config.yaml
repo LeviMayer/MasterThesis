@@ -1,0 +1,191 @@
+_wandb:
+    value:
+        cli_version: 0.24.0
+        e:
+            8a3npmsasuqlcrpkydhdp3oy1k3kpe0g:
+                codePath: train_adjusted.py
+                codePathLocal: train_adjusted.py
+                cpu_count: 4
+                cpu_count_logical: 4
+                cudaVersion: "13.0"
+                disk:
+                    /:
+                        total: "234039422976"
+                        used: "157211488256"
+                email: LeviMayer@gmx.de
+                executable: /home/levi/miniconda/envs/nomad_train/bin/python
+                gpu: NVIDIA GeForce GTX 1060 6GB
+                gpu_count: 2
+                gpu_nvidia:
+                    - architecture: Pascal
+                      cudaCores: 1280
+                      memoryTotal: "6442450944"
+                      name: NVIDIA GeForce GTX 1060 6GB
+                      uuid: GPU-9e97c54e-3e34-b2dd-3426-32b90bbf2ade
+                    - architecture: Pascal
+                      cudaCores: 1152
+                      memoryTotal: "3221225472"
+                      name: NVIDIA GeForce GTX 1060 3GB
+                      uuid: GPU-b081f6c0-bfaa-d338-b32f-629f2d236910
+                host: robilab2
+                memory:
+                    total: "33614196736"
+                os: Linux-6.14.0-34-generic-x86_64-with-glibc2.10
+                program: /home/levi/ros2-turtlebot4-devcontainer/visualnav-transformer-main/train_adjusted.py
+                python: CPython 3.8.5
+                root: /home/levi/ros2-turtlebot4-devcontainer/visualnav-transformer-main
+                startedAt: "2026-01-20T10:26:44.386805Z"
+                writerId: 8a3npmsasuqlcrpkydhdp3oy1k3kpe0g
+        m: []
+        python_version: 3.8.5
+        t:
+            "1":
+                - 1
+                - 41
+                - 49
+                - 71
+                - 83
+            "2":
+                - 1
+                - 41
+                - 49
+                - 71
+                - 83
+            "3":
+                - 3
+                - 17
+            "4": 3.8.5
+            "5": 0.24.0
+            "12": 0.24.0
+            "13": linux-x86_64
+action:
+    value:
+        max_dist_cat: 20
+        min_dist_cat: 3
+alpha:
+    value: "1e-4"
+attn_unet:
+    value: false
+batch_size:
+    value: 256
+beta:
+    value: 0.1
+clipping:
+    value: false
+close_far_threshold:
+    value: 10
+cond_predict_scale:
+    value: false
+context_size:
+    value: 3
+context_type:
+    value: temporal
+cyclic_period:
+    value: 10
+datasets:
+    value:
+        go_stanford:
+            data_folder: train/vint_train/data/data_splits/go_stanford
+            end_slack: 0
+            goals_per_obs: 2
+            negative_mining: true
+            test: train/vint_train/data/data_splits/go_stanford/test/
+            train: train/vint_train/data/data_splits/go_stanford/train/
+distance:
+    value:
+        max_dist_cat: 20
+        min_dist_cat: 0
+down_dims:
+    value:
+        - 64
+        - 128
+        - 256
+encoding_size:
+    value: 256
+epochs:
+    value: 20
+eval_batch_size:
+    value: 400
+eval_fraction:
+    value: 0.25
+eval_freq:
+    value: 1
+goal_encoding_size:
+    value: 1024
+goal_mask_prob:
+    value: 0.5
+goal_type:
+    value: image
+gpu_ids:
+    value:
+        - 0
+image_log_freq:
+    value: 1000
+image_size:
+    value:
+        - 96
+        - 96
+learn_angle:
+    value: false
+len_traj_pred:
+    value: 8
+lr:
+    value: "1e-4"
+max_norm:
+    value: 1
+mha_ff_dim_factor:
+    value: 4
+mha_num_attention_heads:
+    value: 4
+mha_num_attention_layers:
+    value: 4
+model_type:
+    value: nomad
+normalize:
+    value: true
+num_diffusion_iters:
+    value: 10
+num_images_log:
+    value: 8
+num_workers:
+    value: 12
+obs_encoder:
+    value: efficientnet-b0
+obs_encoding_size:
+    value: 1024
+obs_type:
+    value: image
+optimizer:
+    value: adamw
+pairwise_test_freq:
+    value: 0
+plateau_factor:
+    value: 0.5
+plateau_patience:
+    value: 3
+print_log_freq:
+    value: 100
+project_folder:
+    value: /home/levi/ros2-turtlebot4-devcontainer/visualnav-transformer-main/logs/nomad/nomad_2026_01_20_11_26_44
+project_name:
+    value: nomad
+run_name:
+    value: nomad_2026_01_20_11_26_44
+scheduler:
+    value: cosine
+seed:
+    value: 0
+train:
+    value: true
+train_subset:
+    value: 1
+use_wandb:
+    value: true
+vision_encoder:
+    value: nomad_vint
+wandb_log_freq:
+    value: 10
+warmup:
+    value: true
+warmup_epochs:
+    value: 4

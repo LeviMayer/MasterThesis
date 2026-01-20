@@ -1,0 +1,7 @@
+{
+    "python.formatting.provider": "black",
+      // for Jedi / Pylance to resolve imports
+    "python.analysis.extraPaths": [
+        "~/.local/webots/lib/controller/python"
+    ]
+}

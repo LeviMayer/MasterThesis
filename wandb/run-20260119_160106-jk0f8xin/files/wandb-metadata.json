@@ -1,0 +1,43 @@
+{
+  "os": "Linux-6.14.0-34-generic-x86_64-with-glibc2.10",
+  "python": "CPython 3.8.5",
+  "startedAt": "2026-01-19T15:01:06.555028Z",
+  "program": "/home/levi/ros2-turtlebot4-devcontainer/visualnav-transformer-main/train_adjusted.py",
+  "codePath": "train_adjusted.py",
+  "codePathLocal": "train_adjusted.py",
+  "email": "LeviMayer@gmx.de",
+  "root": "/home/levi/ros2-turtlebot4-devcontainer/visualnav-transformer-main",
+  "host": "robilab2",
+  "executable": "/home/levi/miniconda/envs/nomad_train/bin/python",
+  "cpu_count": 4,
+  "cpu_count_logical": 4,
+  "gpu": "NVIDIA GeForce GTX 1060 6GB",
+  "gpu_count": 2,
+  "disk": {
+    "/": {
+      "total": "234039422976",
+      "used": "156608053248"
+    }
+  },
+  "memory": {
+    "total": "33614196736"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce GTX 1060 6GB",
+      "memoryTotal": "6442450944",
+      "cudaCores": 1280,
+      "architecture": "Pascal",
+      "uuid": "GPU-9e97c54e-3e34-b2dd-3426-32b90bbf2ade"
+    },
+    {
+      "name": "NVIDIA GeForce GTX 1060 3GB",
+      "memoryTotal": "3221225472",
+      "cudaCores": 1152,
+      "architecture": "Pascal",
+      "uuid": "GPU-b081f6c0-bfaa-d338-b32f-629f2d236910"
+    }
+  ],
+  "cudaVersion": "13.0",
+  "writerId": "j9objoasgv79hlmgdn6z4z4qdheanana"
+}
