@@ -20,20 +20,22 @@ echo "CUDA_VISIBLE_DEVICES: ${CUDA_VISIBLE_DEVICES:-}"
 module purge
 module load devel/miniforge
 
-# Important: initialize conda for non-interactive shells
-source /opt/bwhpc/common/devel/miniforge/25.3.1-py3.12/etc/profile.d/conda.sh
-conda activate nomad_train
-
+# Headless-safe
 export QT_QPA_PLATFORM=offscreen
 export MPLBACKEND=Agg
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
+# W&B offline (optional)
 export WANDB_MODE=offline
 export WANDB_DIR="$SLURM_SUBMIT_DIR/wandb"
 
+# Use the conda executable directly (no activate/deactivate)
+CONDA_EXE="/opt/bwhpc/common/devel/miniforge/25.3.1-py3.12/bin/conda"
+
 nvidia-smi || true
 
-python - <<'PY'
+# Sanity check
+"$CONDA_EXE" run -n nomad_train --no-capture-output python - <<'PY'
 import sys
 print("Python:", sys.executable)
 import torch
@@ -44,4 +46,6 @@ if torch.cuda.is_available():
 PY
 
 cd "$SLURM_SUBMIT_DIR"
-python train_adjusted.py -c config/nomad.yaml
+
+# Training
+"$CONDA_EXE" run -n nomad_train --no-capture-output python train_adjusted.py -c config/nomad.yaml
