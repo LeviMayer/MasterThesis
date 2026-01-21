@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=nomad_train
-#SBATCH --partition=gpu_a100_il          # ggf. gpu_h100 / gpu_mi300 etc.
+#SBATCH --partition=gpu_a100_il
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
@@ -10,27 +10,50 @@
 
 set -euo pipefail
 
-# (Optional) Debug/Infos
+mkdir -p logs
+
 echo "HOST: $(hostname)"
+echo "DATE: $(date)"
+echo "PWD:  $(pwd)"
+echo "SLURM_JOB_ID: ${SLURM_JOB_ID:-}"
 echo "CUDA_VISIBLE_DEVICES: ${CUDA_VISIBLE_DEVICES:-}"
-nvidia-smi || true
 
-# Module/Conda (Beispiele – je nach UC3 Setup)
+# ---- Modules ----
 module purge
-# Häufig: Miniforge/Conda Modul (wenn bei euch verfügbar)
-# module load devel/miniforge
+module load devel/miniforge
 
-# Wenn du bereits ein conda env hast:
-source ~/miniconda3/etc/profile.d/conda.sh
-conda activate nomad_train
-
-# Headless-safe (Qt/OpenCV)
+# ---- Headless safe (Qt/OpenCV/Matplotlib) ----
 export QT_QPA_PLATFORM=offscreen
 export MPLBACKEND=Agg
 
-# (Optional) W&B offline falls outbound eingeschränkt:
-# export WANDB_MODE=offline
+# ---- CUDA memory fragmentation mitigation ----
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
-cd $SLURM_SUBMIT_DIR
+# ---- Weights & Biases (recommended on clusters) ----
+export WANDB_MODE=offline
+export WANDB_DIR="$SLURM_SUBMIT_DIR/wandb"
+# If you want to disable completely, use instead:
+# export WANDB_DISABLED=true
+
+# ---- Activate env ----
+conda activate nomad_train
+
+# ---- Sanity checks ----
+nvidia-smi || true
+python - <<'PY'
+import sys
+print("Python:", sys.executable)
+try:
+    import torch
+    print("Torch:", torch.__version__)
+    print("CUDA available:", torch.cuda.is_available())
+    if torch.cuda.is_available():
+        print("GPU:", torch.cuda.get_device_name(0))
+except Exception as e:
+    print("Torch check failed:", repr(e))
+PY
+
+# ---- Run training from submit dir ----
+cd "$SLURM_SUBMIT_DIR"
 
 python train_adjusted.py -c config/nomad.yaml
