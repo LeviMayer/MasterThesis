@@ -30,8 +30,6 @@ unset _CE_CONDA _CE_M
 module purge
 module load devel/miniforge
 
-source $CONDA_PREFIX/etc/profile.d/conda.sh
-
 CONDA_EXE="/opt/bwhpc/common/devel/miniforge/25.3.1-py3.12/bin/conda"
 
 # Headless safe
