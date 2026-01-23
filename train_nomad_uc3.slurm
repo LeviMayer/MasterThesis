@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=nomad_train
-#SBATCH --partition=gpu_a100_il
+#SBATCH --partition=gpu_a100_short
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
