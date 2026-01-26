@@ -2,7 +2,7 @@ project_name: nomad
 run_name: nomad
 
 # training setup
-use_wandb: True # set to false if you don't want to log to wandb
+use_wandb: False # set to false if you don't want to log to wandb
 train: True
 batch_size: 128 #256
 epochs: 20 #100
