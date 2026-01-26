@@ -69,9 +69,9 @@ datasets:
   #   goals_per_obs: 1 # how many goals are sampled per observation
   #   negative_mining: True # negative mining from the ViNG paper (Shah et al.)
   go_stanford:
-    data_folder: train/vint_train/data/data_splits/go_stanford # datasets/stanford_go_new
-    train: train/vint_train/data/data_splits/go_stanford/train/
-    test: train/vint_train/data/data_splits/go_stanford/test/
+    data_folder: vint_train/data/data_splits/go_stanford # datasets/stanford_go_new
+    train: vint_train/data/data_splits/go_stanford/train/
+    test: vint_train/data/data_splits/go_stanford/test/
     end_slack: 0
     goals_per_obs: 2 # increase dataset size
     negative_mining: True
