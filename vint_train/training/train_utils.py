@@ -1198,7 +1198,8 @@ def visualize_diffusion_action_distribution(
 
         save_path = os.path.join(visualize_path, f"sample_{i}.png")
         plt.savefig(save_path)
-        wandb_list.append(wandb.Image(save_path))
+        if use_wandb:
+            wandb_list.append(wandb.Image(save_path))
         plt.close(fig)
     if len(wandb_list) > 0 and use_wandb:
         wandb.log({f"{eval_type}_action_samples": wandb_list}, commit=False)
