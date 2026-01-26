@@ -16,13 +16,17 @@ import torch.backends.cudnn as cudnn
 from pathlib import Path
 
 
-import wandb
 from warmup_scheduler import GradualWarmupScheduler
 
 from diffusers.schedulers.scheduling_ddpm import DDPMScheduler
 from diffusers.optimization import get_scheduler  # aktuell nicht genutzt, kann entfernt werden
 
-wandb.init(mode="disabled")
+try:
+    import wandb
+    if hasattr(wandb, "init"):
+        wandb.init(mode="disabled")
+except Exception:
+    pass
 """
 Pfad-Setup: orientiert sich an deiner navigate-Datei,
 aber ohne absolute Windows-Pfade.
