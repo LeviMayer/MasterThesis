@@ -13,6 +13,8 @@ from torch.utils.data import DataLoader, ConcatDataset
 from torch.optim import Adam, AdamW
 from torchvision import transforms
 import torch.backends.cudnn as cudnn
+from pathlib import Path
+
 
 import wandb
 from warmup_scheduler import GradualWarmupScheduler
@@ -381,25 +383,43 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    # Pfade zu den Configs relativ zum Repo
-    defaults_path = os.path.abspath(os.path.join(REPO_ROOT, "train", "config", "defaults.yaml"))
-    user_config_path = os.path.abspath(os.path.join(REPO_ROOT, "train", args.config))
 
+    REPO_ROOT = Path(__file__).resolve().parent
+
+    defaults_path = REPO_ROOT / "train" / "config" / "defaults.yaml"
     with open(defaults_path, "r") as f:
         default_config = yaml.safe_load(f)
 
     config = default_config
 
-    with open(user_config_path, "r") as f:
+    user_cfg_path = REPO_ROOT / "train" / args.config  # e.g. train/config/nomad.yaml
+    with open(user_cfg_path, "r") as f:
         user_config = yaml.safe_load(f)
 
     config.update(user_config)
 
     config["run_name"] += "_" + time.strftime("%Y_%m_%d_%H_%M_%S")
-    config["project_folder"] = os.path.join(
-        REPO_ROOT, "logs", config["project_name"], config["run_name"]
-    )
+    config["project_folder"] = str(REPO_ROOT / "logs" / config["project_name"] / config["run_name"])
     os.makedirs(config["project_folder"])
+
+    # # Pfade zu den Configs relativ zum Repo
+    # defaults_path = os.path.abspath(os.path.join(REPO_ROOT, "train", "config", "defaults.yaml"))
+    # user_config_path = os.path.abspath(os.path.join(REPO_ROOT, "train", args.config))
+
+    # with open(defaults_path, "r") as f:
+    #     default_config = yaml.safe_load(f)
+
+    # config = default_config
+
+    # with open(user_config_path, "r") as f:
+    #     user_config = yaml.safe_load(f)
+
+    # config.update(user_config)
+
+    # config["run_name"] += "_" + time.strftime("%Y_%m_%d_%H_%M_%S")
+    # config["project_folder"] = os.path.join(REPO_ROOT, "logs", config["project_name"], config["run_name"]
+    # )
+    # os.makedirs(config["project_folder"])
 
     if config["use_wandb"]:
         wandb.login()
