@@ -8,7 +8,7 @@
 #SBATCH --output=logs/slurm_%j.out
 #SBATCH --error=logs/slurm_%j.err
 #SBATCH --export=NONE
-#SBATCH --mail-type=tALL
+#SBATCH --mail-type=ALL
 #SBATCH --mail-user=levi.mayer@uni-ulm.de
 
 set -euo pipefail
