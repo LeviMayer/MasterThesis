@@ -1,13 +1,15 @@
 #!/bin/bash
 #SBATCH --job-name=nomad_train
-#SBATCH --partition=gpu_a100_short
+#SBATCH --partition=gpu_a100
 #SBATCH --gres=gpu:1
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=32G
-#SBATCH --time=00:30:00
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=64gb
+#SBATCH --time=08:00:00
 #SBATCH --output=logs/slurm_%j.out
 #SBATCH --error=logs/slurm_%j.err
 #SBATCH --export=NONE
+#SBATCH --mail-type=tALL
+#SBATCH --mail-user=levi.mayer@uni-ulm.de
 
 set -euo pipefail
 mkdir -p logs
